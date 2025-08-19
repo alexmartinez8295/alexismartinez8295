@@ -2,12 +2,12 @@
   <head>
     <title>Pruebas</title>
   </head>
-
   <body>
     <div>
       <h1>Sitio para pruebas</h1>
     </div>
 	  <p>Sitio de desarrollo....</p>
+    
     <div>
       <script type="text/javascript">
         if (!window._laq) {
@@ -25,33 +25,33 @@
         });
       </script>
     </div>
-<script type='text/javascript'>
-	function initEmbeddedMessaging() {
-		try {
-			// Configuración de idioma
-			embeddedservice_bootstrap.settings.language = 'es_MX'; 
-            
-			// Líneas para capturar la URL y pasarla a MessagingSession
-            embeddedservice_bootstrap.settings.extraPrechatFormDetails = [{
-                "label": "URL del Sitio",
-                "value": window.location.href,
-                "displayToAgent": true,
-                "transcriptFields": ["Url_de_origen__c"]
-            }];
 
-			embeddedservice_bootstrap.init(
-				'00DDG00000N95FE',
-				'Chatbot_web',
-				'https://gocar--developer.sandbox.my.site.com/ESWChatbotweb1745223554757',
-				{
-					scrt2URL: 'https://gocar--developer.sandbox.my.salesforce-scrt.com'
-				}
-			);
-		} catch (err) {
-			console.error('Error loading Embedded Messaging: ', err);
-		}
-	};
-</script>
-<script type='text/javascript' src='https://gocar--developer.sandbox.my.site.com/ESWChatbotweb1745223554757/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+    <script type='text/javascript'>
+        function initEmbeddedMessaging() {
+            try {
+                embeddedservice_bootstrap.settings.language = 'es_MX'; 
+                
+                // Configuración para pasar la URL
+                embeddedservice_bootstrap.settings.extraPrechatFormDetails = [{
+                    "label": "URL del Sitio",
+                    "value": window.location.href, // Captura el valor de la URL
+                    "displayToAgent": true,
+                    "transcriptFields": ["Url_de_origen__c"]
+                }];
+
+                embeddedservice_bootstrap.init(
+                    '00DDG00000N95FE',
+                    'Chatbot_web',
+                    'https://gocar--developer.sandbox.my.site.com/ESWChatbotweb1745223554757',
+                    {
+                        scrt2URL: 'https://gocar--developer.sandbox.my.salesforce-scrt.com'
+                    }
+                );
+            } catch (err) {
+                console.error('Error loading Embedded Messaging: ', err);
+            }
+        };
+    </script>
+    <script type='text/javascript' src='https://gocar--developer.sandbox.my.site.com/ESWChatbotweb1745223554757/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
   </body>
 </html>
