@@ -4,9 +4,9 @@
   </head>
   <body>
     <div>
-      <h1>Sitio Test</h1>
+      <h1>Sitio test</h1>
     </div>
-	  <p>Sitio de desarrollo....</p>
+	  <p>Ambiente de desarrollo....</p>
     
     <div>
       <script type="text/javascript">
@@ -29,12 +29,17 @@
     <script type='text/javascript'>
         function initEmbeddedMessaging() {
             try {
+                // Configuración de idioma
                 embeddedservice_bootstrap.settings.language = 'es_MX'; 
-                
-                // Configuración para pasar la URL
+
+                // Crea una variable para almacenar la URL
+                var currentURL = window.location.href;
+            
+                // Líneas para capturar la URL y pasarla a MessagingSession
+                // Usa la variable para asegurarte de que el valor no se pierde
                 embeddedservice_bootstrap.settings.extraPrechatFormDetails = [{
                     "label": "URL del Sitio",
-                    "value": window.location.href, // Captura el valor de la URL
+                    "value": currentURL,
                     "displayToAgent": true,
                     "transcriptFields": ["Url_de_origen__c"]
                 }];
