@@ -41,7 +41,7 @@
           );
           embeddedservice_bootstrap.onSettingsCallBack = function() {
             var currentURL = window.location.href;
-
+            console.log('>>> currentURL: ' + currentURL);
             embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
               "URL": currentURL
             });
