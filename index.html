@@ -30,15 +30,6 @@
       function initEmbeddedMessaging() {
         try {
           embeddedservice_bootstrap.settings.language = "es_MX";
-
-          embeddedservice_bootstrap.init(
-            "00DDG00000N95FE", // Org Id
-            "Chatbot_web", // Deployment Name
-            "https://gocar--developer.sandbox.my.site.com/ESWChatbotweb1745223554757",
-            {
-              scrt2URL: "https://gocar--developer.sandbox.my.salesforce-scrt.com"
-            }
-          );
           embeddedservice_bootstrap.onSettingsCallBack = function() {
             var currentURL = window.location.href;
             console.log('>>> currentURL: ' + currentURL);
@@ -48,7 +39,14 @@
 
             console.log("Campo oculto asignado: GOC_URL__c = " + currentURL);
           };
-
+          embeddedservice_bootstrap.init(
+            "00DDG00000N95FE", // Org Id
+            "Chatbot_web", // Deployment Name
+            "https://gocar--developer.sandbox.my.site.com/ESWChatbotweb1745223554757",
+            {
+              scrt2URL: "https://gocar--developer.sandbox.my.salesforce-scrt.com"
+            }
+          );
         } catch (err) {
           console.error("Error loading Embedded Messaging: ", err);
         }
