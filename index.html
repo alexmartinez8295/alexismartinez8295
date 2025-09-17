@@ -1,7 +1,6 @@
 <html>
   <head>
     <title>Pruebas</title>
-	  <meta><meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"></meta>
   </head>
   <body>
     <div>
@@ -10,40 +9,53 @@
 	  <p>Ambiente de desarrollo....</p>
     
     <div>
-	      <script type="text/javascript">
-	        if (!window._laq) {
-	          window._laq = [];
-	        }
-	        window._laq.push(function () {
-	          liveagent.showWhenOnline(
-	            "5736f000000PX1w",
-	            document.getElementById("liveagent_button_online_5736f000000PX1w")
-	          );
-	          liveagent.showWhenOffline(
-	            "5736f000000PX1w",
-	            document.getElementById("liveagent_button_offline_5736f000000PX1w")
-	          );
-	        });
-	      </script>
-	    </div>
-	<script type='text/javascript'>
-		function initEmbeddedMessaging() {
-			try {
-				embeddedservice_bootstrap.settings.language = 'es_MX'; // For example, enter 'en' or 'en-US'
-	
-				embeddedservice_bootstrap.init(
-					'00DDG00000N95FE',
-					'Chatbot_web',
-					'https://gocar--developer.sandbox.my.site.com/ESWChatbotweb1745223554757',
-					{
-						scrt2URL: 'https://gocar--developer.sandbox.my.salesforce-scrt.com'
-					}
-				);
-			} catch (err) {
-				console.error('Error loading Embedded Messaging: ', err);
-			}
+      <script type="text/javascript">
+        if (!window._laq) {
+          window._laq = [];
+        }
+        window._laq.push(function () {
+          liveagent.showWhenOnline(
+            "5736f000000PX1w",
+            document.getElementById("liveagent_button_online_5736f000000PX1w")
+          );
+          liveagent.showWhenOffline(
+            "5736f000000PX1w",
+            document.getElementById("liveagent_button_offline_5736f000000PX1w")
+          );
+        });
+      </script>
+    </div>
+
+    <script type='text/javascript'>
+        function initEmbeddedMessaging() {
+		    try {
+		        // Configuración de idioma
+		        embeddedservice_bootstrap.settings.language = 'es_MX'; 
+		
+		        // 1. CREA una variable para almacenar la URL
+		        var currentURL = window.location.href;
+		                
+		        // 2. USA EL MÉTODO RECOMENDADO: extraPrechatFormData
+		        //    Aquí se mapea directamente el Nombre API del campo personalizado
+		        embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
+		            // Usa el Nombre API de tu campo personalizado en el objeto Messaging Session o LiveChatTranscript
+		            "GOC_URL": currentURL // <--- Reemplaza GOC_URL__c con el nombre exacto de tu campo
+		        });
+		
+		        embeddedservice_bootstrap.init(
+		            '00DDG00000N95FE',
+		            'Chatbot_web',
+		            'https://gocar--developer.sandbox.my.site.com/ESWChatbotweb1745223554757',
+		            {
+		                scrt2URL: 'https://gocar--developer.sandbox.my.salesforce-scrt.com'
+		            }
+		        );
+		    } catch (err) {
+		        console.error('Error loading Embedded Messaging: ', err);
+		    }
 		};
-	</script>
-	<script type='text/javascript' src='https://gocar--developer.sandbox.my.site.com/ESWChatbotweb1745223554757/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
+        };
+    </script>
+    <script type='text/javascript' src='https://gocar--developer.sandbox.my.site.com/ESWChatbotweb1745223554757/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
   </body>
 </html>
