@@ -28,34 +28,32 @@
 
     <script type='text/javascript'>
         function initEmbeddedMessaging() {
-            try {
-                // Configuración de idioma
-                embeddedservice_bootstrap.settings.language = 'es_MX'; 
-
-                // 1. CREA una variable para almacenar la URL
-                var currentURL = window.location.href;
-            
-                // 2. CONFIGURA los datos extra de Pre-Chat
-                //    ***Asegúrate de que 'transcriptFields' use el Nombre API correcto.***
-                embeddedservice_bootstrap.settings.extraPrechatFormDetails = [{
-                    "label": "URL del Sitio", // Etiqueta que vería el agente (si se muestra)
-                    "value": currentURL,     // Valor capturado (la URL del navegador)
-                    "displayToAgent": true,
-                    // Utiliza el NOMBRE API de tu campo en MessagingSession o LiveChatTranscript.
-                    "transcriptFields": ["GOC_URL__c"] // <--- **AJUSTA ESTO**
-                }];
-
-                embeddedservice_bootstrap.init(
-                    '00DDG00000N95FE',
-                    'Chatbot_web',
-                    'https://gocar--developer.sandbox.my.site.com/ESWChatbotweb1745223554757',
-                    {
-                        scrt2URL: 'https://gocar--developer.sandbox.my.salesforce-scrt.com'
-                    }
-                );
-            } catch (err) {
-                console.error('Error loading Embedded Messaging: ', err);
-            }
+		    try {
+		        // Configuración de idioma
+		        embeddedservice_bootstrap.settings.language = 'es_MX'; 
+		
+		        // 1. CREA una variable para almacenar la URL
+		        var currentURL = window.location.href;
+		                
+		        // 2. USA EL MÉTODO RECOMENDADO: extraPrechatFormData
+		        //    Aquí se mapea directamente el Nombre API del campo personalizado
+		        embeddedservice_bootstrap.settings.extraPrechatFormData = {
+		            // Usa el Nombre API de tu campo personalizado en el objeto Messaging Session o LiveChatTranscript
+		            "GOC_URL__c": currentURL // <--- Reemplaza GOC_URL__c con el nombre exacto de tu campo
+		        };
+		
+		        embeddedservice_bootstrap.init(
+		            '00DDG00000N95FE',
+		            'Chatbot_web',
+		            'https://gocar--developer.sandbox.my.site.com/ESWChatbotweb1745223554757',
+		            {
+		                scrt2URL: 'https://gocar--developer.sandbox.my.salesforce-scrt.com'
+		            }
+		        );
+		    } catch (err) {
+		        console.error('Error loading Embedded Messaging: ', err);
+		    }
+		};
         };
     </script>
     <script type='text/javascript' src='https://gocar--developer.sandbox.my.site.com/ESWChatbotweb1745223554757/assets/js/bootstrap.min.js' onload='initEmbeddedMessaging()'></script>
