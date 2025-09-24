@@ -8,36 +8,23 @@
     </div>
     <p>Ambiente de desarrollo....</p>
 
-    <div>
-      <script type="text/javascript">
-        if (!window._laq) {
-          window._laq = [];
-        }
-        window._laq.push(function () {
-          liveagent.showWhenOnline(
-            "5736f000000PX1w",
-            document.getElementById("liveagent_button_online_5736f000000PX1w")
-          );
-          liveagent.showWhenOffline(
-            "5736f000000PX1w",
-            document.getElementById("liveagent_button_offline_5736f000000PX1w")
-          );
-        });
-      </script>
-    </div>
-
     <script type="text/javascript">
       function initEmbeddedMessaging() {
         try {
           embeddedservice_bootstrap.settings.language = "es_MX";
-          embeddedservice_bootstrap.onSettingsCallBack = function() {
+
+          // Escucha el evento onSettings
+          embeddedservice_bootstrap.addEventHandler("onSettingsApplied", function() {
             var currentURL = window.location.href;
+
+            // Asignar campo oculto
             embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
-              "URL": currentURL
+              "GOC_URL__c": currentURL   // 👈 nombre del campo en tu configuración de prechat
             });
 
             console.log("Campo oculto asignado: GOC_URL__c = " + currentURL);
-          };
+          });
+
           embeddedservice_bootstrap.init(
             "00DDG00000N95FE", // Org Id
             "Chatbot_web", // Deployment Name
