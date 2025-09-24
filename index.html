@@ -9,35 +9,35 @@
     <p>Ambiente de desarrollo....</p>
 
     <script type="text/javascript">
-      function initEmbeddedMessaging() {
-        try {
-          embeddedservice_bootstrap.settings.language = "es_MX";
+  function initEmbeddedMessaging() {
+    try {
+      embeddedservice_bootstrap.settings.language = "es_MX";
 
-          // Escucha el evento onSettings
-          embeddedservice_bootstrap.addEventHandler("onSettingsApplied", function() {
-            var currentURL = window.location.href;
+      // Callback disponible en tu versión de la librería
+      embeddedservice_bootstrap.onSettingsCallBack = function() {
+        var currentURL = window.location.href;
 
-            // Asignar campo oculto
-            embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
-              "GOC_URL__c": currentURL
-            });
+        // Asignar campo oculto
+        embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
+          "GOC_URL__c": currentURL
+        });
 
-            console.log("Campo oculto asignado: GOC_URL__c = " + currentURL);
-          });
+        console.log("Campo oculto asignado: GOC_URL__c = " + currentURL);
+      };
 
-          embeddedservice_bootstrap.init(
-            "00DDG00000N95FE", // Org Id
-            "Chatbot_web", // Deployment Name
-            "https://gocar--developer.sandbox.my.site.com/ESWChatbotweb1745223554757",
-            {
-              scrt2URL: "https://gocar--developer.sandbox.my.salesforce-scrt.com"
-            }
-          );
-        } catch (err) {
-          console.error("Error loading Embedded Messaging: ", err);
+      embeddedservice_bootstrap.init(
+        "00DDG00000N95FE", // Org Id
+        "Chatbot_web",     // Deployment Name
+        "https://gocar--developer.sandbox.my.site.com/ESWChatbotweb1745223554757",
+        {
+          scrt2URL: "https://gocar--developer.sandbox.my.salesforce-scrt.com"
         }
-      }
-    </script>
+      );
+    } catch (err) {
+      console.error("Error loading Embedded Messaging: ", err);
+    }
+  }
+</script>
 
     <script
       type="text/javascript"
