@@ -8,22 +8,21 @@
     </div>
     <p>Ambiente de desarrollo....</p>
 
-   <script type="text/javascript">
+    <script type="text/javascript">
   function initEmbeddedMessaging() {
     try {
       embeddedservice_bootstrap.settings.language = "es_MX";
 
-      // Escuchar en window ANTES de llamar init()
-      window.addEventListener("onEmbeddedMessagingReady", function () {
-        console.log("onEmbeddedMessagingReady disparado");
-        console.log("prechatAPI disponible:", typeof embeddedservice_bootstrap.prechatAPI);
-
-        var currentURL = window.location.href;
-        embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
-          "Url_de_origen__c": currentURL
-        });
-        console.log("Campo asignado:", currentURL);
-      });
+      embeddedservice_bootstrap.addEventListener(
+        "onEmbeddedMessagingReady",
+        function () {
+          var currentURL = window.location.href;
+          embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
+            "Url_de_origen__c": currentURL  // ajusta al API name exacto del pre-chat field
+          });
+          console.log("Campo oculto asignado: Url_de_origen__c = " + currentURL);
+        }
+      );
 
       embeddedservice_bootstrap.init(
         "00DDG00000N95FE",
@@ -33,7 +32,6 @@
           scrt2URL: "https://gocar--developer.sandbox.my.salesforce-scrt.com"
         }
       );
-
     } catch (err) {
       console.error("Error loading Embedded Messaging: ", err);
     }
