@@ -13,22 +13,20 @@
     try {
       embeddedservice_bootstrap.settings.language = "es_MX";
 
-      // Callback disponible en tu versión de la librería
-      embeddedservice_bootstrap.onSettingsCallBack = function() {
-        //var currentURL = window.location.href;
-        var currentURL = 'https://demo.grupogocar.com';
-
-        // Asignar campo oculto
-        embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
-          "GOC_URL__c": currentURL
-        });
-
-        console.log("Campo oculto asignado: GOC_URL__c = " + currentURL);
-      };
+      embeddedservice_bootstrap.addEventListener(
+        "onEmbeddedMessagingReady",
+        function () {
+          var currentURL = window.location.href;
+          embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
+            "Url_de_origen__c": currentURL  // ajusta al API name exacto del pre-chat field
+          });
+          console.log("Campo oculto asignado: Url_de_origen__c = " + currentURL);
+        }
+      );
 
       embeddedservice_bootstrap.init(
-        "00DDG00000N95FE", // Org Id
-        "Chatbot_web",     // Deployment Name
+        "00DDG00000N95FE",
+        "Chatbot_web",
         "https://gocar--developer.sandbox.my.site.com/ESWChatbotweb1745223554757",
         {
           scrt2URL: "https://gocar--developer.sandbox.my.salesforce-scrt.com"
@@ -39,7 +37,6 @@
     }
   }
 </script>
-
     <script
       type="text/javascript"
       src="https://gocar--developer.sandbox.my.site.com/ESWChatbotweb1745223554757/assets/js/bootstrap.min.js"
