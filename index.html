@@ -26,16 +26,21 @@
           var intentos = 0;
           var intervalo = setInterval(function () {
             intentos++;
-            console.log("Intento " + intentos + " — prechatAPI:", typeof embeddedservice_bootstrap.prechatAPI);
-
+          
             if (typeof embeddedservice_bootstrap.prechatAPI === "object" && embeddedservice_bootstrap.prechatAPI !== null) {
               clearInterval(intervalo);
               var currentURL = window.location.href;
-              embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
-                "GOC_URL": currentURL
-              });
-              console.log("Campo asignado correctamente:", currentURL);
-
+          
+              try {
+                embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
+                  "GOC_URL": currentURL
+                });
+                console.log("✅ setHiddenPrechatFields ejecutado sin errores");
+                console.log("✅ Valor enviado:", currentURL);
+              } catch(e) {
+                console.error("❌ Error en setHiddenPrechatFields:", e);
+              }
+          
             } else if (intentos >= maxIntentos) {
               clearInterval(intervalo);
               console.error("prechatAPI no disponible después de " + maxIntentos + " intentos.");
