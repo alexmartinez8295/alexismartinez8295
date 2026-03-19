@@ -13,17 +13,6 @@
     try {
       embeddedservice_bootstrap.settings.language = "es_MX";
 
-      embeddedservice_bootstrap.addEventListener(
-        "onEmbeddedMessagingReady",
-        function () {
-          var currentURL = window.location.href;
-          embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
-            "Url_de_origen__c": currentURL  // ajusta al API name exacto del pre-chat field
-          });
-          console.log("Campo oculto asignado: Url_de_origen__c = " + currentURL);
-        }
-      );
-
       embeddedservice_bootstrap.init(
         "00DDG00000N95FE",
         "Chatbot_web",
@@ -32,6 +21,29 @@
           scrt2URL: "https://gocar--developer.sandbox.my.salesforce-scrt.com"
         }
       );
+
+      // Esperar a que prechatAPI esté disponible
+      var maxIntentos = 20;
+      var intentos = 0;
+      var intervalo = setInterval(function () {
+        intentos++;
+        console.log("Intento " + intentos + " — prechatAPI:", typeof embeddedservice_bootstrap.prechatAPI);
+
+        if (typeof embeddedservice_bootstrap.prechatAPI === "object" && embeddedservice_bootstrap.prechatAPI !== null) {
+          clearInterval(intervalo);
+
+          var currentURL = window.location.href;
+          embeddedservice_bootstrap.prechatAPI.setHiddenPrechatFields({
+            "Url_de_origen__c": currentURL
+          });
+          console.log("Campo asignado correctamente:", currentURL);
+
+        } else if (intentos >= maxIntentos) {
+          clearInterval(intervalo);
+          console.error("prechatAPI no disponible después de " + maxIntentos + " intentos.");
+        }
+      }, 500); // revisa cada 500ms, máximo 10 segundos
+
     } catch (err) {
       console.error("Error loading Embedded Messaging: ", err);
     }
